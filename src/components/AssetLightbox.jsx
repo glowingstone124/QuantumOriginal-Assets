@@ -97,13 +97,33 @@ export default function AssetLightbox({ asset, onClose, onPrev, onNext, position
         <div className="lightbox__head">
           <span className="mono-label">
             {categoryLabel(asset.category)}
-            {total > 0 ? ` · ${position} / ${total}` : ''}
+            {total > 0 ? ` ${position} / ${total}` : ''}
           </span>
           <h2>{asset.title}</h2>
           {asset.description ? <p>{asset.description}</p> : null}
         </div>
 
         <dl className="lightbox__facts">
+          {asset.artist ? (
+            <div>
+              <dt>创作者</dt>
+              <dd>
+                {asset.artistUrl ? (
+                  <a href={asset.artistUrl} target="_blank" rel="noreferrer">
+                    {asset.artist}
+                  </a>
+                ) : (
+                  asset.artist
+                )}
+              </dd>
+            </div>
+          ) : null}
+          {asset.series ? (
+            <div>
+              <dt>系列</dt>
+              <dd>{asset.series}</dd>
+            </div>
+          ) : null}
           <div>
             <dt>格式</dt>
             <dd>{asset.format}</dd>
