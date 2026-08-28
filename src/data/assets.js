@@ -31,7 +31,7 @@ export function normalizeAsset(raw, index) {
     artist: raw.artist || '',
     artistUrl: raw.artistUrl || '',
     date: raw.date || '',
-    license: raw.license || 'CC0 1.0',
+    license: raw.license || '个人非商业使用',
     source: raw.source || '',
     featured: Boolean(raw.featured),
   }

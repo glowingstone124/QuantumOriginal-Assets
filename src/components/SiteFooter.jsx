@@ -13,6 +13,9 @@ export default function SiteFooter() {
           <div className="footer-cell">
             <span className="footer-cell__label mono-label">站点导航</span>
             <nav className="footer-nav" aria-label="页脚导航">
+              <a href="https://qoriginal.vip" target="_blank" rel="noreferrer">
+                <span>返回主站</span>
+              </a>
               <Link to="/gallery">
                 <span>素材库</span>
               </Link>
@@ -24,8 +27,8 @@ export default function SiteFooter() {
           <div className="footer-cell">
             <span className="footer-cell__label mono-label">关于</span>
             <p className="footer-desc">
-              Quantum Original 出品的高清原创视觉素材库，支持在线预览与原文件下载，
-              默认以 CC0 1.0 授权。
+              Quantum Original 出品的高清原创视觉素材库，支持在线预览与原文件下载。
+              素材仅限个人非商业使用。
             </p>
           </div>
           <div className="footer-cell">

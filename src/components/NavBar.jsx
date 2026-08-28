@@ -36,6 +36,14 @@ export default function NavBar() {
         </nav>
 
         <div className="header-actions">
+          <a
+            className="site-link"
+            href="https://qoriginal.vip"
+            target="_blank"
+            rel="noreferrer"
+          >
+            返回主站
+          </a>
           <button
             type="button"
             className="theme-btn"

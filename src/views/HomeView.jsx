@@ -32,7 +32,7 @@ export default function HomeView() {
         label: '最高分辨率',
         value: maxWidth >= 1000 ? `${Math.round(maxWidth / 1000)}K+` : maxWidth > 0 ? `${maxWidth}px` : '高清原文件',
       },
-      { label: '授权方式', value: 'CC0' },
+      { label: '授权方式', value: '个人非商业' },
     ]
   }, [assets])
 

@@ -106,6 +106,26 @@
   gap: 0.55rem;
 }
 
+.site-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.8rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--split);
+  transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.site-link:hover {
+  color: var(--text-main);
+  border-color: var(--text-main);
+  background: var(--background-secondary);
+}
+
 .theme-btn {
   padding: 0 0.8rem;
   height: 44px;
