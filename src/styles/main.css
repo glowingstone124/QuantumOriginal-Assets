@@ -231,7 +231,7 @@ a {
   color: var(--text-main);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, transform var(--motion-fast) var(--ease-out);
+  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, transform var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) ease;
 }
 
 .btn:hover {
@@ -239,20 +239,36 @@ a {
   background: var(--background-secondary);
 }
 
+.btn:active {
+  transform: scale(0.97);
+}
+
 .btn--primary {
-  background: var(--button-primary-bg);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--button-primary-bg) 50%, var(--primary-dark) 100%);
   border-color: var(--button-primary-bg);
   color: var(--button-primary-text);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
 .btn--primary:hover {
-  background: var(--button-primary-hover);
+  background: linear-gradient(135deg, var(--button-primary-bg) 0%, var(--primary-dark) 100%);
   border-color: var(--button-primary-hover);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 35%, transparent);
 }
 
 @keyframes app-section-in {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes section-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes skeleton-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

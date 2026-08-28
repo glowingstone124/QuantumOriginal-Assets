@@ -4,8 +4,10 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--background);
-  border-bottom: 1px solid var(--split);
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.5);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  border-bottom: 1px solid color-mix(in srgb, var(--split) 60%, transparent);
 }
 
 .header-content {
@@ -27,12 +29,13 @@
   padding: 0.35rem 0.7rem 0.35rem 0.42rem;
   text-decoration: none;
   color: var(--text-main);
-  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease;
+  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease, transform var(--motion-fast) var(--ease-out);
 }
 
 .logo-section:hover {
   background: var(--text-main);
   color: var(--background);
+  transform: scale(1.02);
 }
 
 .logo-mark {
@@ -79,6 +82,7 @@
 }
 
 .nav-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   height: 44px;
@@ -88,11 +92,12 @@
   font-size: 0.95rem;
   text-decoration: none;
   border-bottom: 2px solid transparent;
-  transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease;
+  transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease, background-color var(--motion-fast) ease;
 }
 
 .nav-link:hover {
   color: var(--text-main);
+  background: var(--surface-soft);
 }
 
 .nav-link.is-active {
@@ -146,7 +151,21 @@
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--split);
-  background: var(--page-background);
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--text-main) 6%, transparent) 1px, transparent 0) 0 0 / 28px 28px,
+    var(--page-background);
+}
+
+.home-hero::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  width: 55%;
+  height: 60%;
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--primary) 12%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .home-hero__inner {
@@ -262,6 +281,9 @@
 .stat {
   display: grid;
   gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface-soft);
+  border-left: 3px solid var(--primary);
 }
 
 .stat strong {
@@ -277,6 +299,7 @@
 
 .home-section {
   padding: clamp(3rem, 7vh, 5rem) 0;
+  animation: section-fade-in 600ms var(--ease-out) both;
 }
 
 .home-section--tight {
@@ -334,13 +357,19 @@
   overflow: hidden;
   break-inside: avoid;
   cursor: pointer;
-  transition: transform 180ms var(--ease-out), border-color 180ms ease;
+  transition: transform 180ms var(--ease-out), border-color 180ms ease, box-shadow 180ms var(--ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .asset-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     border-color: var(--primary);
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--primary) 12%, transparent), 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .asset-card:hover .asset-card__media img {
+    transform: scale(1.04);
+    transition: transform 320ms var(--ease-out);
   }
 }
 
@@ -363,7 +392,7 @@
   inset: 0;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, #120c07 46%, transparent);
+  background: linear-gradient(to top, rgba(18, 12, 7, 0.55), rgba(18, 12, 7, 0.25));
   color: #fff;
   opacity: 0;
   transition: opacity var(--motion-fast) ease;
@@ -375,6 +404,8 @@
   right: 0.6rem;
   padding: 0.28rem 0.5rem;
   background: color-mix(in srgb, #120c07 68%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #fff;
 }
 
@@ -457,7 +488,7 @@
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color var(--motion-fast) ease, color var(--motion-fast) ease, background-color var(--motion-fast) ease;
+  transition: border-color var(--motion-fast) ease, color var(--motion-fast) ease, background-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
 }
 
 .chip em {
@@ -474,8 +505,9 @@
 
 .chip.is-active {
   border-color: var(--primary);
-  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
   color: var(--primary);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 .chip--static {
@@ -492,8 +524,11 @@
   gap: 0.75rem;
   margin-bottom: clamp(1.25rem, 3vw, 2rem);
   padding: 0.85rem;
-  border: 1px solid var(--split);
-  background: var(--background);
+  border: 1px solid color-mix(in srgb, var(--split) 70%, transparent);
+  background: color-mix(in srgb, var(--background) 85%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
 }
 
 .filter-bar__search {
@@ -546,8 +581,14 @@
 }
 
 .skeleton {
-  background: color-mix(in srgb, var(--text-main) 8%, transparent);
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--text-main) 6%, transparent) 25%,
+    color-mix(in srgb, var(--text-main) 12%, transparent) 50%,
+    color-mix(in srgb, var(--text-main) 6%, transparent) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
 }
 
 .skeleton--media {
@@ -606,7 +647,7 @@
   border: 1px solid color-mix(in srgb, var(--text-main) 12%, transparent);
   background: var(--background);
   text-decoration: none;
-  transition: transform 180ms var(--ease-out), border-color 180ms ease;
+  transition: transform 180ms var(--ease-out), border-color 180ms ease, box-shadow 180ms var(--ease-out);
 }
 
 .category-card strong {
@@ -627,8 +668,9 @@
 
 @media (hover: hover) and (pointer: fine) {
   .category-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     border-color: var(--primary);
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--primary) 12%, transparent), 0 2px 8px rgba(0,0,0,0.06);
   }
 
   .category-card:hover .category-card__arrow {
@@ -638,6 +680,7 @@
 
 .gallery {
   padding: clamp(2rem, 5vh, 3.5rem) 0 clamp(3rem, 8vh, 5rem);
+  animation: section-fade-in 600ms var(--ease-out) both;
 }
 
 .gallery-head {
@@ -661,18 +704,18 @@
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 100;
   display: grid;
   grid-template-columns: minmax(0, 1fr) clamp(300px, 34vw, 460px);
   background: rgba(18, 12, 7, 0.92);
-  animation: app-section-in var(--motion-base) var(--ease-out) both;
+  animation: section-fade-in var(--motion-base) var(--ease-out) both;
 }
 
 .lightbox__close {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  z-index: 3;
+  z-index: 10;
   width: 46px;
   height: 46px;
   font-size: 1.5rem;
@@ -818,6 +861,7 @@
 
 .license {
   padding: clamp(2rem, 5vh, 3.5rem) 0 clamp(3rem, 8vh, 5rem);
+  animation: section-fade-in 600ms var(--ease-out) both;
 }
 
 .license__inner {
@@ -825,8 +869,11 @@
 }
 
 .license-section {
-  padding: 1.6rem 0 0.4rem;
-  border-top: 1px solid color-mix(in srgb, var(--text-main) 12%, transparent);
+  padding: 1.6rem 1.4rem 1rem;
+  margin-bottom: 0.8rem;
+  border-top: none;
+  border-left: 3px solid var(--primary);
+  background: var(--surface-soft);
 }
 
 .license-section h2 {
@@ -847,9 +894,13 @@
   color: var(--text-secondary);
 }
 
+.license-section li::marker {
+  color: var(--primary);
+}
+
 .site-footer {
-  border-top: 1px solid var(--split);
-  background: var(--background);
+  border-top: 2px solid var(--primary);
+  background: var(--background-secondary);
 }
 
 .footer-wordmark {

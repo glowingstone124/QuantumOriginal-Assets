@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import DownloadButton from './DownloadButton.jsx'
 import { categoryLabel } from '../data/assets'
 import { formatBytes } from '../utils/download'
@@ -38,7 +39,7 @@ export default function AssetLightbox({ asset, onClose, onPrev, onNext, position
       ? `${asset.width} × ${asset.height}`
       : '加载后识别'
 
-  return (
+  return createPortal(
     <div
       className="lightbox"
       role="dialog"
@@ -173,6 +174,7 @@ export default function AssetLightbox({ asset, onClose, onPrev, onNext, position
           </a>
         </div>
       </aside>
-    </div>
+    </div>,
+    document.body,
   )
 }
