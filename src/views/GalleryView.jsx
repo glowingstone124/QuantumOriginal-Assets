@@ -1,36 +1,48 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AssetCard from '../components/AssetCard.jsx'
 import AssetCardSkeleton from '../components/AssetCardSkeleton.jsx'
 import AssetLightbox from '../components/AssetLightbox.jsx'
 import FilterBar from '../components/FilterBar.jsx'
-import { categoryLabel } from '../data/assets'
 import { useAssets } from '../hooks/useAssets'
 import { useLightbox } from '../hooks/useLightbox'
 
 export default function GalleryView() {
   const { assets, loading, error } = useAssets()
   const [searchParams, setSearchParams] = useSearchParams()
-  const category = searchParams.get('cat') || 'all'
+  const tag = searchParams.get('tag') || 'all'
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const [sort, setSort] = useState('date')
 
-  const categories = useMemo(() => {
+  useEffect(() => {
+    const q = searchParams.get('q')
+    if (q !== null && q !== query) {
+      setQuery(q)
+    }
+  }, [searchParams])
+
+  const tagsList = useMemo(() => {
     const counts = new Map()
-    assets.forEach((asset) => counts.set(asset.category, (counts.get(asset.category) || 0) + 1))
-    return [...counts.entries()].map(([key, count]) => ({ key, label: categoryLabel(key), count }))
+    assets.forEach((asset) => {
+      asset.tags.forEach((t) => {
+        counts.set(t, (counts.get(t) || 0) + 1)
+      })
+    })
+    return [...counts.entries()]
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh'))
   }, [assets])
 
   const filtered = useMemo(() => {
     let list = assets
-    if (category !== 'all') {
-      list = list.filter((asset) => asset.category === category)
+    if (tag !== 'all') {
+      list = list.filter((asset) => asset.tags.includes(tag))
     }
 
     const keyword = query.trim().toLowerCase()
     if (keyword) {
       list = list.filter((asset) =>
-        [asset.title, asset.description, ...asset.tags]
+        [asset.title, asset.description, asset.artist, asset.series, ...asset.tags]
           .join(' ')
           .toLowerCase()
           .includes(keyword),
@@ -44,18 +56,30 @@ export default function GalleryView() {
       sorted.sort((a, b) => a.title.localeCompare(b.title, 'zh'))
     } else if (sort === 'res') {
       sorted.sort((a, b) => b.width * b.height - a.width * a.height)
+    } else if (sort === 'size') {
+      sorted.sort((a, b) => (b.bytes || 0) - (a.bytes || 0))
     }
 
     return sorted
-  }, [assets, category, query, sort])
+  }, [assets, tag, query, sort])
 
   const lightbox = useLightbox(filtered)
 
-  const updateCategory = (next) => {
+  const updateTag = (next) => {
     if (next === 'all') {
-      searchParams.delete('cat')
+      searchParams.delete('tag')
     } else {
-      searchParams.set('cat', next)
+      searchParams.set('tag', next)
+    }
+    setSearchParams(searchParams, { replace: true })
+  }
+
+  const updateQuery = (next) => {
+    setQuery(next)
+    if (!next.trim()) {
+      searchParams.delete('q')
+    } else {
+      searchParams.set('q', next)
     }
     setSearchParams(searchParams, { replace: true })
   }
@@ -65,17 +89,17 @@ export default function GalleryView() {
       <div className="page-shell">
         <div className="gallery-head">
           <h1>素材库</h1>
-          <p>全部素材均可在线预览并下载高清原文件。</p>
+          <p>全部素材均可在线即时预览并免费下载高清母带原文件。</p>
         </div>
 
         <FilterBar
           query={query}
-          onQueryChange={setQuery}
-          category={category}
-          onCategoryChange={updateCategory}
+          onQueryChange={updateQuery}
+          tag={tag}
+          onTagChange={updateTag}
           sort={sort}
           onSortChange={setSort}
-          categories={categories}
+          tags={tagsList}
           shown={filtered.length}
           total={assets.length}
         />
@@ -89,7 +113,7 @@ export default function GalleryView() {
         ) : error ? (
           <div className="state-note state-note--error">
             <p>{error.message}</p>
-            <p>请确认 public/assets/manifest.json 是否存在且包含素材条目。</p>
+            <p>请确认 public/assets/manifest.json 是否存在且格式正确。</p>
           </div>
         ) : filtered.length ? (
           <div className="asset-grid">
@@ -99,8 +123,8 @@ export default function GalleryView() {
           </div>
         ) : (
           <div className="state-note">
-            <p>没有符合条件素材质。</p>
-            <p>试试调整关键词或切换分类。</p>
+            <p>没有找到符合条件的素材作品。</p>
+            <p>建议尝试调整搜索关键词或切换标签。</p>
           </div>
         )}
       </div>

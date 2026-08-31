@@ -1,42 +1,57 @@
+import { Search, X } from 'lucide-react'
+
 export default function FilterBar({
   query,
   onQueryChange,
-  category,
-  onCategoryChange,
+  tag,
+  onTagChange,
   sort,
   onSortChange,
-  categories,
+  tags,
   shown,
   total,
 }) {
   return (
     <div className="filter-bar">
       <div className="filter-bar__search">
+        <Search size={16} className="filter-bar__search-icon" />
         <input
           type="search"
           value={query}
-          placeholder="搜索标题或标签…"
+          placeholder="搜索素材标题、作者或标签…"
           aria-label="搜索素材"
           onChange={(event) => onQueryChange(event.target.value)}
         />
+        {query && (
+          <button
+            type="button"
+            className="filter-bar__clear-btn"
+            onClick={() => onQueryChange('')}
+            aria-label="清空搜索"
+          >
+            <X size={14} />
+          </button>
+        )}
       </div>
 
-      <div className="filter-bar__chips" aria-label="分类筛选">
+      <div className="filter-bar__chips" aria-label="标签筛选">
         <button
           type="button"
-          className={category === 'all' ? 'chip is-active' : 'chip'}
-          onClick={() => onCategoryChange('all')}
+          className={tag === 'all' ? 'chip is-active' : 'chip'}
+          onClick={() => onTagChange('all')}
         >
-          全部 <em>{total}</em>
+          <span>全部</span>
+          <em>{total}</em>
         </button>
-        {categories.map((cat) => (
+        {tags.map((t) => (
           <button
-            key={cat.key}
+            key={t.name}
             type="button"
-            className={category === cat.key ? 'chip is-active' : 'chip'}
-            onClick={() => onCategoryChange(cat.key)}
+            className={tag === t.name ? 'chip is-active' : 'chip'}
+            onClick={() => onTagChange(t.name)}
           >
-            {cat.label} <em>{cat.count}</em>
+            <span>#{t.name}</span>
+            <em>{t.count}</em>
           </button>
         ))}
       </div>
@@ -44,9 +59,10 @@ export default function FilterBar({
       <label className="filter-bar__sort">
         <span className="mono-label">排序</span>
         <select value={sort} onChange={(event) => onSortChange(event.target.value)}>
-          <option value="date">最新优先</option>
-          <option value="name">名称 A→Z</option>
-          <option value="res">分辨率优先</option>
+          <option value="date">最新发布</option>
+          <option value="name">名称 (A→Z)</option>
+          <option value="res">超清分辨率</option>
+          <option value="size">文件大小</option>
         </select>
       </label>
 

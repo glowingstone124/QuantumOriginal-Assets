@@ -1,4 +1,4 @@
-export default function LogoMark({ size = 38 }) {
+export default function LogoMark({ size = 36 }) {
   return (
     <svg
       className="logo-mark"
@@ -8,35 +8,35 @@ export default function LogoMark({ size = 38 }) {
       fill="none"
       aria-hidden="true"
     >
+      {/* Outer Hexagonal Geometric Prism */}
       <path
-        d="M30 6 L51 18 V42 L30 54 L9 42 V18 Z"
+        d="M32 6 L54 18.5 V43.5 L32 56 L10 43.5 V18.5 Z"
         stroke="currentColor"
         strokeWidth="3.5"
-        strokeLinejoin="round"
+        strokeLinejoin="miter"
       />
+      {/* Inner Isometric Wireframe Faces */}
       <path
-        d="M9 18 L30 30 L51 18"
+        d="M10 18.5 L32 31 L54 18.5"
         stroke="currentColor"
         strokeWidth="2.5"
-        strokeLinejoin="round"
-        opacity="0.7"
+        strokeLinejoin="miter"
+        opacity="0.75"
       />
       <path
-        d="M30 30 V54"
+        d="M32 31 V56"
         stroke="currentColor"
         strokeWidth="2.5"
-        opacity="0.7"
+        opacity="0.75"
       />
-      <rect
-        x="25"
-        y="2.5"
-        width="10"
-        height="10"
+      {/* Primary Diamond Top Accent */}
+      <polygon
+        points="32,2.5 37.5,8 32,13.5 26.5,8"
         fill="var(--primary)"
-        transform="rotate(45 30 7.5)"
       />
-      <circle cx="51" cy="42" r="3" fill="currentColor" opacity="0.65" />
-      <circle cx="9" cy="42" r="3" fill="currentColor" opacity="0.65" />
+      {/* Node Vertices */}
+      <rect x="52" y="41.5" width="4" height="4" fill="currentColor" opacity="0.8" />
+      <rect x="8" y="41.5" width="4" height="4" fill="currentColor" opacity="0.8" />
     </svg>
   )
 }

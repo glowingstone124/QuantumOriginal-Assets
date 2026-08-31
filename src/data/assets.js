@@ -1,12 +1,10 @@
 export const CATEGORY_META = {
-  wallpaper: { label: '壁纸', folder: 'wallpapers' },
-  background: { label: '背景', folder: 'backgrounds' },
-  illustration: { label: '插画', folder: 'illustrations' },
-  icon: { label: '图标', folder: 'icons' },
+  pixelfantasia: { label: 'Pixel Fantasia', folder: 'pixelfantasia' },
+  illustration: { label: 'Pixel Fantasia', folder: 'illustrations' },
 }
 
 export function categoryLabel(key) {
-  return CATEGORY_META[key]?.label || '其他'
+  return CATEGORY_META[key]?.label || 'Pixel Fantasia'
 }
 
 function guessFormat(file) {
@@ -19,15 +17,15 @@ export function normalizeAsset(raw, index) {
     id: String(raw.id || `asset-${index + 1}`),
     title: raw.title || raw.id || `未命名素材 ${index + 1}`,
     description: raw.description || '',
-    category: raw.category || 'other',
+    category: raw.category || 'pixelfantasia',
     file: raw.file || '',
     thumb: raw.thumb || raw.file || '',
     width: Number(raw.width) || 0,
     height: Number(raw.height) || 0,
     bytes: Number(raw.bytes) || 0,
     format: String(raw.format || guessFormat(raw.file)).toUpperCase(),
-    tags: Array.isArray(raw.tags) ? raw.tags : [],
-    series: raw.series || '',
+    tags: Array.isArray(raw.tags) ? raw.tags : ['Pixel Fantasia'],
+    series: raw.series || 'Pixel Fantasia',
     artist: raw.artist || '',
     artistUrl: raw.artistUrl || '',
     date: raw.date || '',

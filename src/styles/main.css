@@ -1,74 +1,106 @@
+/* ==========================================================================
+   QUANTUM ORIGINAL ASSETS — EDITORIAL ANGULAR DESIGN SYSTEM
+   Strictly following QuantumOriginal Brand Guidelines (qcommunity/COLOR)
+   and Emil Kowalski / Apple Design Engineering
+   ========================================================================== */
+
 :root {
-  --app-header-height: 72px;
-  --font-sans: 'Space Grotesk', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'Space Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --app-header-height: 70px;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   --font-display: var(--font-sans);
-  --primary: #C25A44;
-  --primary-dark: #9E4634;
-  --primary-light: #E07A5F;
-  --background: #FDFBF7;
-  --background-secondary: #F7F2EA;
-  --page-background: var(--background-secondary);
-  --card-background: #F1EAE0;
-  --glass-strong: var(--background);
-  --glass-soft: var(--background-secondary);
-  --surface-soft: color-mix(in srgb, var(--text-main) 4%, transparent);
-  --split: #E6DED2;
-  --text-secondary: #8A7A6C;
-  --text-main: #2E2620;
-  --title-color: #1D1610;
-  --success: #4E8C4A;
-  --warning: #B87828;
-  --error: #C0392B;
-  --button-primary-bg: #C25A44;
-  --button-primary-text: #FFF8F2;
-  --button-primary-hover: #9E4634;
-  --button-secondary-bg: #FDFBF7;
-  --button-secondary-border: #C25A44;
-  --button-secondary-text: #C25A44;
-  --button-secondary-hover: #F7E8E2;
+
+  /* Light Theme Palette (from QuantumOriginal COLOR spec) */
+  --primary: #2563EB;
+  --primary-rgb: 37, 99, 235;
+  --primary-dark: #1E40AF;
+  --primary-light: #60A5FA;
+  --primary-tint: #EFF6FF;
+
+  --background: #FFFFFF;
+  --background-secondary: #F8FAFC;
+  --card-background: #FFFFFF;
+  --surface-soft: #F1F5F9;
+  --surface-hover: #EFF6FF;
+
+  --split: #E5E7EB;
+  --split-strong: #D1D5DB;
+  --border-soft: #E5E7EB;
+
+  --text-main: #1F2937;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --title-color: #0F172A;
+
+  /* Semantic Feedback */
+  --success: #16A34A;
+  --warning: #F59E0B;
+  --error: #DE2626;
+
+  /* Button Tokens */
+  --button-primary-bg: #2563EB;
+  --button-primary-text: #FFFFFF;
+  --button-primary-hover: #1E40AF;
+
+  --button-secondary-bg: #FFFFFF;
+  --button-secondary-border: #2563EB;
+  --button-secondary-text: #2563EB;
+  --button-secondary-hover: #EFF6FF;
+
   --button-ghost-bg: transparent;
-  --button-ghost-text: #C25A44;
-  --button-ghost-hover: #F7E8E2;
-  --dark-bg: #120C07;
-  --dark-card: #1A120B;
-  --dark-border: #2C2014;
-  --dark-text-primary: #F2E8DC;
-  --dark-text-secondary: #A89684;
-  --dark-text-muted: #6E5F50;
-  --text: var(--text-main);
-  --border-soft: color-mix(in srgb, var(--split) 82%, transparent);
-  --radius-panel: 18px;
-  --motion-fast: 160ms;
-  --motion-base: 240ms;
-  --motion-slow: 280ms;
+  --button-ghost-text: #2563EB;
+  --button-ghost-hover: #EFF6FF;
+
+  /* Geometry: 0px Sharp Precision */
+  --radius-panel: 0px;
+  --radius-btn: 0px;
+  --radius-card: 0px;
+
+  /* Motion & Spring Tokens (Emil Kowalski / Apple WWDC) */
+  --motion-fast: 130ms;
+  --motion-base: 190ms;
+  --motion-slow: 260ms;
+
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-standard: var(--ease-out);
-  --measure-readable: 72ch;
+
+  --measure-readable: 68ch;
 }
 
+/* Dark Theme Palette (from QuantumOriginal COLOR spec) */
 :root[data-theme="dark"] {
-  --background: var(--dark-bg);
-  --background-secondary: var(--dark-card);
-  --page-background: var(--background);
-  --card-background: #201710;
-  --glass-strong: var(--background-secondary);
-  --glass-soft: #241A10;
-  --surface-soft: color-mix(in srgb, var(--dark-text-primary) 7%, transparent);
-  --split: var(--dark-border);
-  --text-main: var(--dark-text-primary);
-  --text-secondary: var(--dark-text-secondary);
-  --title-color: var(--dark-text-primary);
-  --button-secondary-bg: #1A120B;
-  --button-secondary-border: #C25A44;
-  --button-secondary-text: #E89A7E;
-  --button-secondary-hover: #0E0904;
-  --button-ghost-text: #E89A7E;
-  --button-ghost-hover: #0E0904;
-  --text: var(--text-main);
+  --background: #0B1220;
+  --background-secondary: #0F172A;
+  --card-background: #111827;
+  --surface-soft: #162032;
+  --surface-hover: #1E293B;
+
+  --split: #1F2937;
+  --split-strong: #374151;
+  --border-soft: #1F2937;
+
+  --text-main: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --title-color: #F8FAFC;
+
+  --primary-light: #60A5FA;
+  --primary-tint: rgba(37, 99, 235, 0.12);
+
+  --button-secondary-bg: #111827;
+  --button-secondary-border: #2563EB;
+  --button-secondary-text: #60A5FA;
+  --button-secondary-hover: #1E293B;
+
+  --button-ghost-bg: transparent;
+  --button-ghost-text: #60A5FA;
+  --button-ghost-hover: #1E293B;
 }
 
+/* Space Grotesk Typography Fonts */
 @font-face {
   font-family: 'Space Grotesk';
   src: url('../assets/fonts/space-grotesk/space-grotesk-latin-300-normal.woff2') format('woff2');
@@ -109,9 +141,11 @@
   font-display: swap;
 }
 
-* {
-  font-family: var(--font-sans);
+/* Global Reset & Base */
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -120,11 +154,16 @@ html {
 }
 
 body {
-  margin: 0;
+  min-height: 100dvh;
+  width: 100%;
+  font-family: var(--font-sans);
   background: var(--background);
   color: var(--text-main);
-  width: 100%;
-  min-height: 100dvh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease;
 }
 
 #root {
@@ -133,79 +172,59 @@ body {
   flex-direction: column;
 }
 
-button,
-input,
-textarea,
-select {
+/* Interactive Elements & Focus */
+button, input, textarea, select {
   font: inherit;
+  color: inherit;
 }
 
-button,
-a,
-input,
-textarea,
-select {
+button, a, input, textarea, select {
   -webkit-tap-highlight-color: transparent;
 }
 
 :where(button, a, input, textarea, select, [tabindex]):focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
-  outline-offset: 3px;
-}
-
-:where(p, li) {
-  line-height: 1.65;
-}
-
-:where(h1, h2, h3) {
-  color: var(--title-color);
-  text-wrap: balance;
-}
-
-:where(p, li, dd) {
-  overflow-wrap: anywhere;
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--primary) 24%, transparent);
-  color: var(--title-color);
+  background: var(--primary);
+  color: #FFFFFF;
 }
 
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  background-color: transparent;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--text-secondary) 42%, transparent);
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background-clip: content-box;
+  background-color: var(--split-strong);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: color-mix(in srgb, var(--text-main) 58%, transparent);
+  background-color: var(--primary);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--text-secondary) 42%, transparent) transparent;
+  scrollbar-color: var(--split-strong) transparent;
 }
 
+/* Layout Container */
 .page-shell {
-  width: min(1560px, 100%);
+  width: min(1520px, 100%);
   margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 3rem);
-  box-sizing: border-box;
+  padding: 0 clamp(1.2rem, 4vw, 3rem);
 }
 
 .app-main {
@@ -213,64 +232,98 @@ a {
   width: 100%;
 }
 
-.mono-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
+/* Buttons System (Emil Kowalski tactile precision) */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  border-radius: var(--radius-btn);
   border: 1px solid var(--split);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
   background: transparent;
   color: var(--text-main);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, transform var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) ease;
-}
-
-.btn:hover {
-  border-color: var(--text-main);
-  background: var(--background-secondary);
+  transition: transform var(--motion-fast) var(--ease-out),
+              background-color var(--motion-fast) ease,
+              border-color var(--motion-fast) ease,
+              color var(--motion-fast) ease;
 }
 
 .btn:active {
   transform: scale(0.97);
 }
 
+.btn--sm {
+  height: 36px;
+  padding: 0 0.9rem;
+  font-size: 0.82rem;
+}
+
+.btn--md {
+  height: 42px;
+  padding: 0 1.25rem;
+  font-size: 0.9rem;
+}
+
+.btn--lg {
+  height: 48px;
+  padding: 0 1.6rem;
+  font-size: 0.96rem;
+}
+
 .btn--primary {
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--button-primary-bg) 50%, var(--primary-dark) 100%);
-  border-color: var(--button-primary-bg);
+  background: var(--button-primary-bg);
   color: var(--button-primary-text);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 25%, transparent);
+  border-color: var(--button-primary-bg);
 }
 
-.btn--primary:hover {
-  background: linear-gradient(135deg, var(--button-primary-bg) 0%, var(--primary-dark) 100%);
-  border-color: var(--button-primary-hover);
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 35%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover {
+    background: var(--button-primary-hover);
+    border-color: var(--button-primary-hover);
+  }
 }
 
-@keyframes app-section-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+.btn--secondary {
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border-color: var(--button-secondary-border);
 }
 
-@keyframes section-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .btn--secondary:hover {
+    background: var(--button-secondary-hover);
+  }
 }
 
-@keyframes skeleton-sweep {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+.btn--ghost {
+  background: transparent;
+  color: var(--button-ghost-text);
+  border-color: var(--split);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .btn--ghost:hover {
+    background: var(--button-ghost-hover);
+    border-color: var(--primary);
+  }
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
